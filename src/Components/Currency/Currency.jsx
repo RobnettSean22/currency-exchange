@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import ExchangeButton from "../Exchange-Button/ExchangeButton";
+import { isNumber } from "util";
 
 class Currency extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      rates: []
+      rates: [],
+      amountInput: ""
     };
   }
   componentDidMount() {
@@ -22,10 +24,16 @@ class Currency extends Component {
   };
 
   render() {
-    const { rates } = this.state;
+    const { rates, amountInput } = this.state;
     return (
       <div>
         <ExchangeButton exchangeRate={rates} />
+        <div>
+          <input
+            value={amountInput}
+            onChange={e => this.setState({ amountInput: e.target.value })}
+          />
+        </div>
       </div>
     );
   }
