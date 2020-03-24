@@ -21,8 +21,16 @@ class Currency extends Component {
     });
   };
 
-  calc = (from, input, rate) => {
-    let calculated  = from === "EUR" ? input * rate 
+  calc = (from, to, input, rate, frate) => {
+    let calculated =
+      from === "EUR"
+        ? input * rate
+        : to === "EUR"
+        ? input * (1 / rate)
+        : from || to !== "EUR"
+        ? input * (rate / frate)
+        : "hello";
+    return calculated;
   };
 
   render() {
