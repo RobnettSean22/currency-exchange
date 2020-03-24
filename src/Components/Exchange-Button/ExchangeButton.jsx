@@ -1,7 +1,8 @@
 import React from "react";
 
 function ExchangeButton(props) {
-  return <div></div>;
+  console.log(props.value);
+  return <button></button>;
 }
 
 export default ExchangeButton;

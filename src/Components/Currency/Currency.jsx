@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import ExchangeButton from "../Exchange-Button/ExchangeButton";
 
 class Currency extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      rates: [],
+      CurrencyRates: [],
       amountInput: ""
     };
   }
@@ -17,28 +16,37 @@ class Currency extends Component {
   exchangeRates = () => {
     axios.get(`https://api.exchangeratesapi.io/latest`).then(res => {
       this.setState({
-        rates: res.data.rates
+        CurrencyRates: res.data.rates
       });
     });
   };
 
-  render() {
-    const { rates, amountInput } = this.state;
+  calc = (from, input, rate) => {
+    let calculated  = from === "EUR" ? input * rate 
+  };
 
-    let rateArray = Object.entries(rates);
-    const sortArrays = rateArray.sort().map(items => {
-      return items[1];
+  render() {
+    const { CurrencyRates, amountInput } = this.state;
+
+    let rateArray = Object.entries(CurrencyRates);
+
+    const sortArrays = rateArray.sort().map((items, i) => {
+      return (
+        <option key={i} value={items[1]}>
+          {items[0]}
+        </option>
+      );
     });
 
-    console.log(sortArrays);
     return (
       <div>
-        <ExchangeButton exchangeRate={rates} />
         <div>
           <input
             value={amountInput}
             onChange={e => this.setState({ amountInput: e.target.value })}
           />
+          <select id='xChange-rates'> {sortArrays}</select>
+          <button></button>
         </div>
       </div>
     );
