@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import ExchangeButton from "../Exchange-Button/ExchangeButton";
-import { isNumber } from "util";
 
 class Currency extends Component {
   constructor(props) {
@@ -18,13 +17,20 @@ class Currency extends Component {
   exchangeRates = () => {
     axios.get(`https://api.exchangeratesapi.io/latest`).then(res => {
       this.setState({
-        rates: res.data
+        rates: res.data.rates
       });
     });
   };
 
   render() {
     const { rates, amountInput } = this.state;
+
+    let rateArray = Object.entries(rates);
+    const sortArrays = rateArray.sort().map(items => {
+      return items[1];
+    });
+
+    console.log(sortArrays);
     return (
       <div>
         <ExchangeButton exchangeRate={rates} />

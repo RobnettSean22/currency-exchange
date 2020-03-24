@@ -1,6 +1,6 @@
 import React from "react";
 
-function ExchangeButton() {
+function ExchangeButton(props) {
   return <div></div>;
 }
 
