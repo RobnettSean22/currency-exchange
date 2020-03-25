@@ -9,9 +9,10 @@ class Currency extends Component {
       CurrencyRates: [],
       amountInput: "",
       fromSelect: 1.8315,
+      fromElement: this.props.children,
       toSelect: 1.8315,
-      fromName: "",
-      toName: ""
+      exchanged: null,
+      display: false
     };
     this.fromChange = this.fromChange.bind(this);
   }
@@ -28,39 +29,49 @@ class Currency extends Component {
 
   fromChange = e => {
     this.setState({
-      fromSelect: e.target.value
+      fromSelect: e.target.value.split(",")
     });
   };
   toChange = e => {
     this.setState({
-      toSelect: e.target.value
+      toSelect: e.target.value.split(",")
     });
   };
 
-  calc = (fS, tS, input) => {
+  calc = () => {
+    const { fromSelect, amountInput, toSelect } = this.state;
+
     let calculated =
-      fS === 1
-        ? input * tS
-        : tS === 1
-        ? input * (tS / fS)
-        : fS || tS !== 1
-        ? input * (tS / fS)
+      fromSelect[0] === 1
+        ? amountInput * toSelect[0]
+        : toSelect[0] === 1
+        ? amountInput * (1 / fromSelect[0])
+        : fromSelect[0] || toSelect[0] !== 1
+        ? amountInput * (toSelect[0] / fromSelect[0])
         : "hello";
-    console.log(calculated);
+    this.setState({ exchanged: calculated });
   };
 
   render() {
-    const { CurrencyRates, amountInput, fromSelect, toSelect } = this.state;
+    const {
+      CurrencyRates,
+      amountInput,
+      fromSelect,
+      toSelect,
+      exchanged,
+      display
+    } = this.state;
 
     let rateArray = Object.entries(CurrencyRates);
 
     const sortArrays = rateArray.sort().map((items, i) => {
       return (
-        <option key={i} value={items[1]}>
+        <option key={i} value={[items[1], items[0]]}>
           {items[0]}
         </option>
       );
     });
+    console.log(fromSelect[0], toSelect[2]);
 
     return (
       <div>
@@ -77,9 +88,14 @@ class Currency extends Component {
             <option value='1'>EUR</option>
             {sortArrays}
           </select>
-          <button
-            onClick={this.calc(fromSelect, toSelect, amountInput)}
-          ></button>
+          <button onClick={this.calc}></button>
+        </div>
+        <div className={display ? "visible" : "hidden"}>
+          {exchanged}
+          {fromSelect[0]}
+          {fromSelect[1]}
+          {toSelect[0]}
+          {toSelect[1]}
         </div>
       </div>
     );
