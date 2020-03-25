@@ -9,8 +9,11 @@ class Currency extends Component {
       CurrencyRates: [],
       amountInput: "",
       fromSelect: 1.8315,
-      toSelect: 1.8315
+      toSelect: 1.8315,
+      fromName: "",
+      toName: ""
     };
+    this.fromChange = this.fromChange.bind(this);
   }
   componentDidMount() {
     this.exchangeRates();
@@ -23,16 +26,27 @@ class Currency extends Component {
     });
   };
 
-  calc = (from, to, input, rate, frate) => {
+  fromChange = e => {
+    this.setState({
+      fromSelect: e.target.value
+    });
+  };
+  toChange = e => {
+    this.setState({
+      toSelect: e.target.value
+    });
+  };
+
+  calc = (fS, tS, input) => {
     let calculated =
-      from === "EUR"
-        ? input * rate
-        : to === "EUR"
-        ? input * (1 / rate)
-        : from || to !== "EUR"
-        ? input * (rate / frate)
+      fS === 1
+        ? input * tS
+        : tS === 1
+        ? input * (tS / fS)
+        : fS || tS !== 1
+        ? input * (tS / fS)
         : "hello";
-    return calculated;
+    console.log(calculated);
   };
 
   render() {
@@ -55,21 +69,17 @@ class Currency extends Component {
             value={amountInput}
             onChange={e => this.setState({ amountInput: e.target.value })}
           />
-          <select
-            value={fromSelect}
-            onChange={e => this.setState({ fromSelect: e.target.value })}
-          >
-            {" "}
+          <select value={fromSelect} onChange={this.fromChange}>
+            <option value='1'>EUR</option>
             {sortArrays}
           </select>
-          <select
-            value={toSelect}
-            onChange={e => this.setState({ toSelect: e.target.value })}
-          >
-            {" "}
+          <select value={toSelect} onChange={this.toChange}>
+            <option value='1'>EUR</option>
             {sortArrays}
           </select>
-          <button></button>
+          <button
+            onClick={this.calc(fromSelect, toSelect, amountInput)}
+          ></button>
         </div>
       </div>
     );
