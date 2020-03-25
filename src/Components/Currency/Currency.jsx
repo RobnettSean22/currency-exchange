@@ -7,7 +7,9 @@ class Currency extends Component {
 
     this.state = {
       CurrencyRates: [],
-      amountInput: ""
+      amountInput: "",
+      fromSelect: 1.8315,
+      toSelect: 1.8315
     };
   }
   componentDidMount() {
@@ -34,7 +36,7 @@ class Currency extends Component {
   };
 
   render() {
-    const { CurrencyRates, amountInput } = this.state;
+    const { CurrencyRates, amountInput, fromSelect, toSelect } = this.state;
 
     let rateArray = Object.entries(CurrencyRates);
 
@@ -53,7 +55,20 @@ class Currency extends Component {
             value={amountInput}
             onChange={e => this.setState({ amountInput: e.target.value })}
           />
-          <select id='xChange-rates'> {sortArrays}</select>
+          <select
+            value={fromSelect}
+            onChange={e => this.setState({ fromSelect: e.target.value })}
+          >
+            {" "}
+            {sortArrays}
+          </select>
+          <select
+            value={toSelect}
+            onChange={e => this.setState({ toSelect: e.target.value })}
+          >
+            {" "}
+            {sortArrays}
+          </select>
           <button></button>
         </div>
       </div>
