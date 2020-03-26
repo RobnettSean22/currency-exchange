@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import "./Currency.scss";
 import axios from "axios";
 
@@ -109,6 +110,7 @@ class Currency extends Component {
               value={amountInput}
               onChange={e => this.setState({ amountInput: e.target.value })}
             />
+
             <select value={fromSelect} onChange={this.fromChange}>
               <option value={["1"]}>{data.base}</option>
               {sortArrays}
