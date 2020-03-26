@@ -49,28 +49,46 @@ class Currency extends Component {
     if (fromSelect[0] === 1) {
       let calculated = amountInput * toSelect[0];
       this.setState({
-        exchanged: calculated,
-        display: true
+        exchanged: calculated
+          .toFixed(3)
+          .toString()
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
+        display: true,
+        amountInput: this.state.amountInput
+          .toString()
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
       });
     } else if (toSelect[0] === 1) {
       let rate = 1 / fromSelect[0];
       let reverseRate = toSelect[0] / fromSelect[0];
       let calculated = amountInput * rate;
       this.setState({
-        exchanged: calculated,
-        oneFromRate: rate,
-        oneToRate: reverseRate,
-        display: true
+        exchanged: calculated
+          .toFixed(3)
+          .toString()
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
+        oneFromRate: rate.toFixed(3),
+        oneToRate: reverseRate.toFixed(3),
+        display: true,
+        amountInput: this.state.amountInput
+          .toString()
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
       });
     } else if (fromSelect[0] || toSelect[0] !== 1) {
       let reverseRate = toSelect[0] / fromSelect[0];
       let rate = fromSelect[0] / toSelect[0];
       let calculated = amountInput * reverseRate;
       this.setState({
-        exchanged: calculated,
-        oneFromRate: reverseRate,
-        oneToRate: rate,
-        display: true
+        exchanged: calculated
+          .toFixed(3)
+          .toString()
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
+        oneFromRate: reverseRate.toFixed(3),
+        oneToRate: rate.toFixed(3),
+        display: true,
+        amountInput: this.state.amountInput
+          .toString()
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
       });
     }
   };
@@ -125,19 +143,21 @@ class Currency extends Component {
           </div>
           <div id={display ? "results" : "hidden"}>
             <div id='fromto'>
-              <h1>
+              <h4>
                 {fromSelect[1]} to {toSelect[1]}
-              </h1>
+              </h4>
             </div>
             <div id='converted'>
               <div>
                 {" "}
-                {amountInput}
-                {fromSelect[1]}
+                <h2>
+                  {amountInput} {fromSelect[1]} =
+                </h2>
               </div>
               <div>
-                {exchanged}
-                {toSelect[1]}
+                <h1>
+                  {exchanged} {toSelect[1]}
+                </h1>
               </div>
               <div>
                 {" "}
@@ -146,7 +166,7 @@ class Currency extends Component {
               </div>
             </div>
             <div id='date'>
-              <h1>{data.date}</h1>
+              <h4>Updated on:{data.date}</h4>
             </div>
           </div>
         </div>
