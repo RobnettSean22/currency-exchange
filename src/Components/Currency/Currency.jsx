@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Currency.scss";
 import axios from "axios";
 
 class Currency extends Component {
@@ -6,10 +7,10 @@ class Currency extends Component {
     super(props);
 
     this.state = {
+      data: [],
       CurrencyRates: [],
       amountInput: "",
       fromSelect: 1.8315,
-      fromElement: this.props.children,
       toSelect: 1.8315,
       exchanged: null,
       oneToRate: null,
@@ -24,6 +25,7 @@ class Currency extends Component {
   exchangeRates = () => {
     axios.get(`https://api.exchangeratesapi.io/latest`).then(res => {
       this.setState({
+        data: res.data,
         CurrencyRates: res.data.rates
       });
     });
@@ -45,7 +47,8 @@ class Currency extends Component {
     if (fromSelect[0] === 1) {
       let calculated = amountInput * toSelect[0];
       this.setState({
-        exchanged: calculated
+        exchanged: calculated,
+        display: true
       });
     } else if (toSelect[0] === 1) {
       let rate = 1 / fromSelect[0];
@@ -54,7 +57,8 @@ class Currency extends Component {
       this.setState({
         exchanged: calculated,
         oneFromRate: rate,
-        oneToRate: reverseRate
+        oneToRate: reverseRate,
+        display: true
       });
     } else if (fromSelect[0] || toSelect[0] !== 1) {
       let reverseRate = toSelect[0] / fromSelect[0];
@@ -63,7 +67,8 @@ class Currency extends Component {
       this.setState({
         exchanged: calculated,
         oneFromRate: reverseRate,
-        oneToRate: rate
+        oneToRate: rate,
+        display: true
       });
     }
   };
@@ -77,8 +82,11 @@ class Currency extends Component {
       exchanged,
       oneFromRate,
       oneToRate,
-      display
+      display,
+      data
     } = this.state;
+
+    console.log(data.date);
 
     let rateArray = Object.entries(CurrencyRates);
 
@@ -93,25 +101,35 @@ class Currency extends Component {
 
     return (
       <div>
-        <div>
-          <input
-            value={amountInput}
-            onChange={e => this.setState({ amountInput: e.target.value })}
-          />
-          <select value={fromSelect} onChange={this.fromChange}>
-            <option value='1'>EUR</option>
-            {sortArrays}
-          </select>
-          <select value={toSelect} onChange={this.toChange}>
-            <option value='1'>EUR</option>
-            {sortArrays}
-          </select>
-          <button onClick={this.calc}></button>
+        <div id='container'>
+          <div id='calculator'>
+            <input
+              value={amountInput}
+              onChange={e => this.setState({ amountInput: e.target.value })}
+            />
+            <select value={fromSelect} onChange={this.fromChange}>
+              <option value='1'>{data.base}</option>
+              {sortArrays}
+            </select>
+            <select value={toSelect} onChange={this.toChange}>
+              <option value='1'>{data.base}</option>
+              {sortArrays}
+            </select>
+          </div>
+          <div id='conversion'>
+            <button onClick={this.calc}>Convert</button>
+          </div>
         </div>
-        <div className={display ? "visible" : "hidden"}>
-          {exchanged}
-          {oneFromRate}
-          {oneToRate}
+        <div className={display ? "results" : "hidden"}>
+          <div id='fromto'>
+            {fromSelect[1]} to {toSelect[1]}
+          </div>
+          <div>
+            {exchanged}
+            {oneFromRate}
+            {oneToRate}
+          </div>
+          <div id='date'>{data.date}</div>
 
           {fromSelect[1]}
 
