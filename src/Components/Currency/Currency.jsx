@@ -9,9 +9,10 @@ class Currency extends Component {
     this.state = {
       data: [],
       CurrencyRates: [],
+
       amountInput: "",
-      fromSelect: 1.8315,
-      toSelect: 1.8315,
+      fromSelect: ["1"],
+      toSelect: ["1"],
       exchanged: null,
       oneToRate: null,
       oneFromRate: null,
@@ -86,8 +87,6 @@ class Currency extends Component {
       data
     } = this.state;
 
-    console.log(data.date);
-
     let rateArray = Object.entries(CurrencyRates);
 
     const sortArrays = rateArray.sort().map((items, i) => {
@@ -102,38 +101,52 @@ class Currency extends Component {
     return (
       <div>
         <div id='container'>
+          {/* <div className={display ? "title" : "hidden"}>
+            {amountInput} {fromSelect[1]} to {toSelect}
+          </div> */}
           <div id='calculator'>
             <input
               value={amountInput}
               onChange={e => this.setState({ amountInput: e.target.value })}
             />
             <select value={fromSelect} onChange={this.fromChange}>
-              <option value='1'>{data.base}</option>
+              <option value={["1"]}>{data.base}</option>
               {sortArrays}
             </select>
             <select value={toSelect} onChange={this.toChange}>
-              <option value='1'>{data.base}</option>
+              <option value={["1"]}>{data.base}</option>
               {sortArrays}
             </select>
           </div>
           <div id='conversion'>
             <button onClick={this.calc}>Convert</button>
           </div>
-        </div>
-        <div className={display ? "results" : "hidden"}>
-          <div id='fromto'>
-            {fromSelect[1]} to {toSelect[1]}
+          <div id={display ? "results" : "hidden"}>
+            <div id='fromto'>
+              <h1>
+                {fromSelect[1]} to {toSelect[1]}
+              </h1>
+            </div>
+            <div id='converted'>
+              <div>
+                {" "}
+                {amountInput}
+                {fromSelect[1]}
+              </div>
+              <div>
+                {exchanged}
+                {toSelect[1]}
+              </div>
+              <div>
+                {" "}
+                {oneFromRate}
+                {oneToRate}
+              </div>
+            </div>
+            <div id='date'>
+              <h1>{data.date}</h1>
+            </div>
           </div>
-          <div>
-            {exchanged}
-            {oneFromRate}
-            {oneToRate}
-          </div>
-          <div id='date'>{data.date}</div>
-
-          {fromSelect[1]}
-
-          {toSelect[1]}
         </div>
       </div>
     );
