@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Chart from "../Chart/Chart";
 import "./Currency.scss";
 import axios from "axios";
 
@@ -119,6 +119,8 @@ class Currency extends Component {
 
     return (
       <div>
+        <div id='header'>fjskdfs</div>
+
         <div id='container'>
           <div id={display ? "title" : "hidden"}>
             {amountInput} {fromSelect[1]} to {toSelect[1]}
@@ -141,41 +143,42 @@ class Currency extends Component {
           <div id='conversion'>
             <button onClick={this.calc}>Convert</button>
           </div>
-          <div id={display ? "results" : "hidden"}>
-            <div id='fromto'>
+        </div>
+        <div id={display ? "results" : "hidden"}>
+          <div id='fromto'>
+            <h2>
+              {fromSelect[1]} to {toSelect[1]}
+            </h2>
+          </div>
+          <div id='converted'>
+            <div id='start'>
+              {" "}
               <h2>
-                {fromSelect[1]} to {toSelect[1]}
+                {amountInput} {fromSelect[1]} =
               </h2>
             </div>
-            <div id='converted'>
-              <div id='start'>
-                {" "}
-                <h2>
-                  {amountInput} {fromSelect[1]} =
-                </h2>
-              </div>
-              <div id='mid'>
-                <h1>
-                  {exchanged} {toSelect[1]}
-                </h1>
-              </div>
-              <div id='fin'>
-                {" "}
-                <h2>
-                  {" "}
-                  1 {fromSelect[1]} = {oneFromRate} {toSelect[1]}
-                </h2>
-                <h2>
-                  {" "}
-                  1 {toSelect[1]} = {oneToRate} {fromSelect[1]}
-                </h2>
-              </div>
+            <div id='mid'>
+              <h1>
+                {exchanged} {toSelect[1]}
+              </h1>
             </div>
-            <div id='date'>
-              <h2>Updated on:{data.date}</h2>
+            <div id='fin'>
+              {" "}
+              <h2>
+                {" "}
+                1 {fromSelect[1]} = {oneFromRate} {toSelect[1]}
+              </h2>
+              <h2>
+                {" "}
+                1 {toSelect[1]} = {oneToRate} {fromSelect[1]}
+              </h2>
             </div>
           </div>
+          <div id='date'>
+            <h2>Updated on:{data.date}</h2>
+          </div>
         </div>
+        <Chart exc={rateArray} date={data.date} based={data.base} />
       </div>
     );
   }

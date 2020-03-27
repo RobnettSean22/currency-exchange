@@ -1,15 +1,33 @@
 body {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 div {
   width: 100%;
   height: 100%;
+
+  #header {
+    width: 100%;
+    height: 13%;
+    box-shadow: 0px 100px 11px -8px rgba(0, 0, 0, 0.75);
+    background: linear-gradient(
+      90deg,
+      rgba(254, 129, 4, 1) 0%,
+      rgba(255, 161, 66, 1) 97%
+    );
+  }
+
   #container {
     width: 100%;
-    height: 50%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     background: linear-gradient(
-      9deg,
+      90deg,
       rgba(2, 172, 229, 1) 0%,
       rgba(3, 161, 208, 1) 31%,
       rgba(0, 212, 255, 1) 100%
@@ -31,13 +49,15 @@ div {
       align-items: center;
       input {
         width: 20%;
-        height: 50%;
+        height: 65%;
         border-radius: 5px;
         font-size: 30px;
+        padding-left: 1%;
+        background: rgb(235, 235, 235);
       }
       select {
         width: 21%;
-        height: 58%;
+        height: 75%;
         -webkit-appearance: none;
         -moz-appearance: none;
         -ms-appearance: none;
@@ -49,9 +69,10 @@ div {
         background-image: none;
 
         padding: 0 0.5em;
-        color: #fff;
+        color: rgb(235, 235, 235);
         font-size: 30px;
         text-align: center;
+
         cursor: pointer;
       }
       select::-ms-expand {
@@ -60,35 +81,46 @@ div {
     }
     #conversion {
       width: 100%;
-      height: 20%;
-      background: orange;
+      height: 24%;
+
       display: flex;
       justify-content: center;
       align-items: center;
       button {
-        width: 20%;
+        width: 18%;
         height: 80%;
         font-size: 30px;
         font-weight: bold;
         border-radius: 5px;
+        background: rgb(235, 235, 235);
         &:hover {
           cursor: pointer;
-          width: 20.5%;
+          width: 18.5%;
           height: 80.5%;
+          font-size: 30.5px;
         }
       }
     }
   }
   #results {
     width: 100%;
-    height: 54%;
+    height: 25%;
+    margin-top: -3;
     display: flex;
+    background: linear-gradient(
+      90deg,
+      rgba(2, 172, 229, 1) 0%,
+      rgba(3, 161, 208, 1) 31%,
+      rgba(0, 212, 255, 1) 100%
+    );
+    border-top: 3px solid rgb(254, 129, 4);
     #fromto {
       width: 25%;
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: flex-end;
+      color: rgb(235, 235, 235);
     }
     #converted {
       width: 50%;
@@ -105,10 +137,13 @@ div {
       #start {
         height: 20%;
         width: 100%;
+        color: rgb(235, 235, 235);
       }
       #mid {
         h1 {
-          font-size: 45px;
+          font-size: 49px;
+          color: rgb(235, 235, 235);
+          margin: 0;
         }
       }
       #fin {
@@ -118,6 +153,7 @@ div {
         flex-direction: column;
         h2 {
           margin: 0.5%;
+          color: rgb(235, 235, 235);
         }
       }
     }
@@ -127,6 +163,7 @@ div {
       display: flex;
       justify-content: center;
       align-items: flex-end;
+      color: rgb(235, 235, 235);
     }
   }
   #hidden {
