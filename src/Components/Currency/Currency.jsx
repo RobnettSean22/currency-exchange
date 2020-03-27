@@ -120,9 +120,9 @@ class Currency extends Component {
     return (
       <div>
         <div id='container'>
-          {/* <div className={display ? "title" : "hidden"}>
-            {amountInput} {fromSelect[1]} to {toSelect}
-          </div> */}
+          <div id={display ? "title" : "hidden"}>
+            {amountInput} {fromSelect[1]} to {toSelect[1]}
+          </div>
           <div id='calculator'>
             <input
               value={amountInput}
