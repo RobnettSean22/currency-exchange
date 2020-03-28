@@ -1,19 +1,38 @@
 import React, { Component } from "react";
-import CanvasJSReact from "./canvasjs.react";
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
+import { Bar, Line, Pie } from "react-chartjs-2";
 
 class Chart extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      chartData: {}
+    };
   }
-
+  getstuff = (names, rates) => {
+    const data = {
+      chartData: {
+        labels: names,
+        datasets: [
+          {
+            label: "Excahnge rates",
+            data: rates,
+            backgroundColor: ["rgba(3, 12, 34, 0.75)"]
+          }
+        ]
+      }
+    };
+    return data;
+  };
   render() {
-    const { exc, date, based } = this.props;
-    console.log(exc, date, based);
-    return <div></div>;
+    console.log(this.props.name, this.props.exc);
+
+    return (
+      <div>
+        <Bar data={this.getstuff} options={{}} />
+      </div>
+    );
   }
 }
 

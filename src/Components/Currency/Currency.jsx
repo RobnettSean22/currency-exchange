@@ -108,6 +108,13 @@ class Currency extends Component {
 
     let rateArray = Object.entries(CurrencyRates);
 
+    let s = rateArray.map(b => {
+      return b[0];
+    });
+    let t = rateArray.map(b => {
+      return b[1];
+    });
+
     const sortArrays = rateArray.sort().map((items, i) => {
       return (
         <option key={i} value={[items[1], items[0]]}>
@@ -115,16 +122,14 @@ class Currency extends Component {
         </option>
       );
     });
-    console.log(fromSelect[0], toSelect[2]);
 
     return (
       <div>
-        <div id='header'>fjskdfs</div>
+        <div id='header'>
+          <h1>CurrencyXChange</h1>
+        </div>
 
         <div id='container'>
-          <div id={display ? "title" : "hidden"}>
-            {amountInput} {fromSelect[1]} to {toSelect[1]}
-          </div>
           <div id='calculator'>
             <input
               value={amountInput}
@@ -178,7 +183,7 @@ class Currency extends Component {
             <h2>Updated on:{data.date}</h2>
           </div>
         </div>
-        <Chart exc={rateArray} date={data.date} based={data.base} />
+        <Chart name={s} exc={t} date={data.date} based={data.base} />
       </div>
     );
   }
