@@ -105,11 +105,8 @@ div {
         font-weight: bold;
         border-radius: 5px;
         background: rgb(235, 235, 235);
-        &:hover {
-          cursor: pointer;
-          width: 18.5%;
-          height: 80.5%;
-          font-size: 30.5px;
+        &:focus {
+          outline: none;
         }
       }
     }
