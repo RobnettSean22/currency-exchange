@@ -50,7 +50,7 @@ class Chart extends Component {
     return (
       <div>
         <div id='button-case'>
-          <button onClick={this.getstuff}>Rates Chart</button>
+          <button onClick={this.getstuff}>Chart</button>
         </div>
         <div className={this.state.visible === true ? "see" : "blind"}>
           <Line
