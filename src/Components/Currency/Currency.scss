@@ -49,22 +49,27 @@ div {
 
     #calculator {
       width: 100%;
-      height: 30%;
 
+      height: 72%;
       display: flex;
       justify-content: space-evenly;
+      flex-direction: column;
       align-items: center;
       input {
-        width: 20%;
-        height: 65%;
+        // width: 20%;
+        // height: 65%;
+        width: 63%;
+        height: 22%;
         border-radius: 5px;
         font-size: 30px;
         padding-left: 1%;
         background: rgb(235, 235, 235);
       }
       select {
-        width: 21%;
-        height: 75%;
+        // width: 21%;
+        // height: 75%;
+        width: 72%;
+        height: 25%;
         -webkit-appearance: none;
         -moz-appearance: none;
         -ms-appearance: none;
@@ -74,12 +79,10 @@ div {
         border: 0 !important;
         background: #2c3e50;
         background-image: none;
-
         padding: 0 0.5em;
         color: rgb(235, 235, 235);
         font-size: 30px;
         text-align: center;
-
         cursor: pointer;
       }
       select::-ms-expand {
@@ -94,8 +97,10 @@ div {
       justify-content: center;
       align-items: center;
       button {
-        width: 18%;
-        height: 80%;
+        // width: 18%;
+        // height: 80%;
+        width: 44%;
+        height: 64%;
         font-size: 30px;
         font-weight: bold;
         border-radius: 5px;
@@ -124,19 +129,20 @@ div {
     #fromto {
       width: 25%;
       height: 100%;
-      display: flex;
+      display: none;
       justify-content: center;
       align-items: flex-end;
       color: rgb(235, 235, 235);
     }
     #converted {
-      width: 50%;
+      //   width: 50%;
+      width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      div {
+      #mid {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -148,7 +154,8 @@ div {
       }
       #mid {
         h1 {
-          font-size: 49px;
+          //   font-size: 49px;
+          font-size: 29px;
           color: rgb(235, 235, 235);
           margin: 0;
         }
@@ -159,6 +166,7 @@ div {
         align-items: center;
         flex-direction: column;
         h2 {
+          font-size: 24px;
           margin: 0.5%;
           color: rgb(235, 235, 235);
         }
@@ -167,7 +175,7 @@ div {
     #date {
       width: 25%;
       height: 100%;
-      display: flex;
+      display: none;
       justify-content: center;
       align-items: flex-end;
       color: rgb(235, 235, 235);
@@ -175,5 +183,65 @@ div {
   }
   #hidden {
     display: none;
+  }
+}
+
+@media (min-width: 712px) {
+  div {
+    #container {
+      #calculator {
+        flex-direction: row;
+        height: 30%;
+        input {
+          width: 20%;
+          height: 65%;
+        }
+        select {
+          width: 21%;
+          height: 75%;
+        }
+      }
+      #conversion {
+        button {
+          width: 18%;
+          height: 80%;
+        }
+      }
+    }
+    #results {
+      width: 100%;
+      height: 25%;
+      margin-top: -3;
+      display: flex;
+      background: linear-gradient(
+        90deg,
+        rgba(2, 172, 229, 1) 0%,
+        rgba(3, 161, 208, 1) 31%,
+        rgba(0, 212, 255, 1) 100%
+      );
+      border-top: 3px solid rgb(254, 129, 4);
+      #fromto {
+        display: flex;
+      }
+      #converted {
+        width: 50%;
+
+        #mid {
+          h1 {
+            font-size: 49px;
+          }
+        }
+        #fin {
+          h2 {
+            font-size: 24px;
+            margin: 0.5%;
+            color: rgb(235, 235, 235);
+          }
+        }
+      }
+      #date {
+        display: flex;
+      }
+    }
   }
 }
